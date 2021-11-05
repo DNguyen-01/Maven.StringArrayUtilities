@@ -2,6 +2,7 @@ package com.zipcodewilmington;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 /**
@@ -13,7 +14,7 @@ public class StringArrayUtils {
      * @return first element of specified array
      */ // TODO
     public static String getFirstElement(String[] array) {
-     //variable is already declared in the (String[] array)
+        //variable is already declared in the (String[] array)
 
         return array[0];
     }
@@ -33,7 +34,7 @@ public class StringArrayUtils {
      */ // TODO
     public static String getLastElement(String[] array) { //always start with something you know
         //declare (type) (variableName) = (input)(help method)
-        int lastElement = array.length-1;
+        int lastElement = array.length - 1;
         //.length this gets the total size of the array, capacity
         return array[lastElement];
     }
@@ -44,7 +45,7 @@ public class StringArrayUtils {
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
 
-        int secondToLastPosition = array.length-2;
+        int secondToLastPosition = array.length - 2;
         //.length-2 = minus the last two position because the index begins at zero.
         return array[secondToLastPosition];
     }
@@ -55,11 +56,11 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-       //based on the two input value
+        //based on the two input value
         // we are comparing the value against the array
         //array.length checks the size of the array int.
-        for(int i = 0; i < array.length; i++){
-            if(array[i].equals(value)){
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(value)) {
                 //(Variable- Array) . equals(string method)(variable-value) { if statement
                 //for loops better to return true so that you continue to check the
                 //rest of the array for the equal value
@@ -76,11 +77,11 @@ public class StringArrayUtils {
     public static String[] reverse(String[] array) {
         //create a new array labeled such, and it will contain the new array w/ length (w/ original array size)
         String[] reverseArray = new String[array.length];
-        for(int i = array.length-1,reverseArrayPosition=0; i >= 0; i--,reverseArrayPosition++){
+        for (int i = array.length - 1, reverseArrayPosition = 0; i >= 0; i--, reverseArrayPosition++) {
             reverseArray[reverseArrayPosition] = array[i];
         }
-            //for loop = int i = length of array -1 (last position)
-            //we will be reading the array from right to left based on the for loop
+        //for loop = int i = length of array -1 (last position)
+        //we will be reading the array from right to left based on the for loop
 
         return reverseArray;
     }
@@ -91,10 +92,10 @@ public class StringArrayUtils {
      */ // TODO
     public static boolean isPalindromic(String[] array) {
 
-        String[] reverseArray = reverse(array);
-//        if(array == reverseArray);
-        for (int i = 0; i < array.length; i++){
-            if(!array[i].equals(reverseArray[i])){ //! bang operator - states if its not true do this
+        String[] reverseArray = reverse(array); //the creation of an empty array to store the data within the for(loop)
+        //if(array == reverseArray);
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].equals(reverseArray[i])) { //! bang operator - states if its not true do this
                 return false;
             }
         }
@@ -106,8 +107,25 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+        //return a true/false statement
+        //while checking the values within the element are equal
+        //return results to the new variable array
+        String newPangramic = Arrays.toString(array); //string utils build into IDE = Arrays.toString(array)
+        if (newPangramic.length() < 26) {
+            return false; //creating the condition that says if the array does not contain all the letters of the alphabet.
+        }
+        String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+        for (int i = 0; i < alphabet.length; i++) {
+            if (!newPangramic.contains(alphabet[i])) {
+                return false;
+            }
+        }
+            return true;
     }
+
+
+
+
 
     /**
      * @param array array of String objects
@@ -168,8 +186,22 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single
      * string in an array of Strings
      */ // TODO
+
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        String duplicates = array[0]; //container to hold the starting the position at 1
+
+        for(int i=1; i < array.length; i++){
+            //if we are going thru the array and we encounter a letter that is similar to the letter before;
+            if(array[i].equals(array[i-1])){  //this is saying: if the last position is not equal to the current position
+                duplicates += array[i];  //duplicate = duplicate + array[i] - if true, concat the duplicates
+            }
+            else{
+               duplicates = duplicates + " " + array[i];  // this else method here tracks the ones that does not match and space them out
+            }
+            System.out.println("duplicate " + duplicates);
+        }
+
+        return duplicates.split(" ");//usage of the delimiter to, let the program does the spacing for us between the consecutive and the unique single character
     }
 
 
